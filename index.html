@@ -1,182 +1,50 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
-  <title>Trevo da Sorte</title>
-  <!-- HTML 4 -->
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <!-- HTML5 -->
-  <meta charset="utf-8" />
-  <meta http-equiv="Content-Type" content="text/html/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link rel=" stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
-
-  <style>
-    body {
-      font-family: Verdana;
-      color: green;
-    }
-
-    input {
-      width: 3em;
-      margin: 0.5em;
-      text-align: center;
-    }
-
-    .container {
-      margin: 3em 5em 0 5em;
-      text-align: center;
-    }
-
-    .titulo {
-      margin: 0 0 1em 0;
-      font-size: 2em;
-    }
-
-    .btm {
-      width: 5em;
-      background-color: white;
-    }
-
-    .resultado {
-      text-align: center;
-      margin: 1em 3em 0 3em;
-    }
-  </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Trevo da Sorte</title>
 </head>
 
 <body>
-  <div class="container">
-    <div class="titulo"> Trevo da Sorte</div>
-    <div><span>Rodadas: </span><input type="number" min="0" max="100" value="10" id="round" /></div>
-    <div><span>Números: </span><input type="number" min="0" max="10" value="6" id="num" /></div>
-    <div><span>De: </span><input type="number" min="0" max="100" value="1" id="de" />
-      <span>até: </span><input type="number" min="0" max="100" value="60" id="ate" /></div>
-    <div><input type="checkbox" id="luck" checked="true" onclick="More()"><span>Mais Sorteados</span></div>
-    <input class="btm" type="submit" value="Gerar" onclick="Gerar()" />
-    <div class="resultado"><span id="res"> Aguardando Dados </span>
-      <span id="rod"> </span><span id="x"> </span></div>
-  </div>
-
-  <script>
-    function Gerar() {
-
-      //variaveis
-      var round = document.getElementById("round").value;
-      var num = document.getElementById("num").value;
-      var ent = document.getElementById("de").value;
-      var out = document.getElementById("ate").value;
-      var res = document.getElementById("res");
-      var dup = 0; roda = 0; t = 0;
-      res.innerHTML = "";
-      var dados = []; more = [];
-
-      // Gera varias rres.innerHTML=dados;odadas
-      for (y = 0; y < round; y++) {
-        // Gera os numeros automaticos
-        while (roda < num) {
-          var n = parseInt(Math.random() * 100);
-          // Verifica se o numero aleatorio esta entre o min e max
-          if ((n >= ent) && (n <= out)) {
-            // Confere se o numero ja foi sorteado
-            for (c = 0; c < roda; c++) {
-              if (n == dados[c]) {
-                dup++;
-              }
-            }
-            // Salva se o numero for unico
-            if (dup == 0) {
-              if (n < 10) {
-                n = "0" + n;
-              }
-              dados[roda] = n;
-              roda++;
-              more[t] = n;
-              t++;
-            }
-            dup = 0;
-          }
-        }
-        roda = 0;
-        // Ordenas os numeros e exibe
-        res.innerHTML = res.innerHTML + "<b>Rodada " + (y + 1) + ": ";
-        res.innerHTML = res.innerHTML + dados.sort() + "<br>";
-        res.innerHTML = res.innerHTML.replace(/,/g, " ");
-      }
-
-      //Gera os mais sorteados
-      m = 1; s = 0;
-      mord = []; mcont = []; mfull = [];
-      //if (luck==1){
-
-      //Procura repeditos e conta
-      for (i = ent; i <= out; i++) {
-        for (c = 0; c < (round * num); c++) {
-          if ((more[c].valueOf()) == i) {
-            m++;
-            mord[c] = m;
-          }
-        }
-        m = 0;
-      }
-      //Guarda a posicao dos mais sorteados
-      for (b = round; b >= 0; b--) {
-        for (z = 0; z <= (round * num); z++) {
-          if (b == mord[z]) {
-            mcont[s] = z;
-            s++;
-          }
-        }
-      }
-      //Recebe valor dos mais sorteados
-      a = 0; mf = 0;
-      for (y = 0; y < num;) {
-        for (h = 0; h <= y; h++) {
-          if (mfull[h] == more[mcont[a]]) {
-            mf++;
-          }
-        }
-        if (mf == 0) {
-          mfull[y] = (more[mcont[a]]);
-          y++;
-        }
-        a++;
-        mf = 0;
-      }
-
-      // Ordenas os numeros e exibe
-      mfull.sort();
-      rod.innerHTML = "<br><b>Mais sorteados: <br>" + mfull;
-      rod.innerHTML = rod.innerHTML.replace(/,/g, " ");
-      More();
-      //}
-    }
-
-    function More() {
-      var luck = document.getElementById("luck").checked;
-      var color = document.getElementById("res");
-      var num = document.getElementById("num").value;
-      var rod = document.getElementById("rod").innerHTML;
-      var c = "";
-
-      if (luck == 1) {
-        for (i = 27; i < (num * 3) + 27; i = (i + 3)) {
-          c = rod.substring(i, i + 2);
-          // console.log(" I: " + i + " C: " + c );
-          var re = new RegExp(c, 'g');
-          color.innerHTML = color.innerHTML.replace(re, "<ii style=background-color:lightgreen;>" + c + "</ii> ");
-          document.getElementById("rod").style.display = 'block';
-        }
-      } else {
-        document.getElementById("rod").style.display = 'none';
-        color.innerHTML = color.innerHTML.replace(/<ii style="background-color:lightgreen;">/g, "");
-        color.innerHTML = color.innerHTML.replace(/<\ii>/g, "");
-        color.innerHTML = color.innerHTML.replace(/  /g, " ");
-      }
-
-    }
-  </script>
+    <div class="d-flex justify-content-center">
+        <div class="border">
+            <div class="titulo text-center"> Trevo da Sorte</div>
+            <div class="text-left pl-5 ml-5">
+                <div class="mt-3">
+                    <span>Rodadas: </span>
+                    <input type="number" min="0" max="100" value="10" id="round" />
+                </div>
+                <div class="mt-3">
+                    <span>Números: </span>
+                    <input type="number" min="0" max="10" value="6" id="num" />
+                </div>
+                <div class="mt-3">
+                    <span>De: </span>
+                    <input type="number" min="0" max="100" value="1" id="de" />
+                    <span>até: </span>
+                    <input type="number" min="0" max="100" value="60" id="ate" />
+                </div>
+            </div>
+            <div class="mt-3 d-flex justify-content-center">
+                <input type="checkbox" id="luck" checked="true" onclick="More()">
+                <span class="align-self-center">Mais Sorteados</span>
+            </div>
+            <div class="mt-3 text-center">
+                <button class="btn btn-success px-3" type="button" onclick="Gerar()" />Gerar</button>
+            </div>
+            <div class="resultado mt-3 text-center">
+                <span id="res"> Aguardando Dados </span>
+                <span id="rod"> </span>
+                <span id="x"> </span>
+            </div>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
