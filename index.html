@@ -1,56 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <title>Trevo da Sorte</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="./css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Trevo da Sorte</title>
 </head>
 
-<body>
-    <div class="d-flex justify-content-center">
-        <div class="border mx-2">
-            <div class="titulo text-center"> Trevo da Sorte</div>
-            <div class="text-left pl-5 ml-5">
-                <div class="mt-3">
-                    <span>Rodadas: </span>
-                    <input type="number" min="0" max="100" value="10" id="round" />
-                </div>
-                <div class="mt-3">
-                    <span>Números: </span>
-                    <input type="number" min="0" max="10" value="6" id="num" />
-                </div>
-                <div class="mt-3">
-                    <span>De: </span>
-                    <input type="number" min="0" max="100" value="1" id="de" />
-                    <span>até: </span>
-                    <input type="number" min="0" max="100" value="60" id="ate" />
-                </div>
+<body class="bg-success">
+  <div class="container-fluid px-lg-0">
+    <div id="first" class="row mx-0 py-3 align-items-center">
+      <div class="col-lg-4 mx-auto bg-white rounded shadow-custom p-3">
+        <div class="border rounded">
+          <h1 class="my-3 fw-bold text-center">Trevo da Sorte</h1>
+          <hr class="my-3 mx-3 text-secondary">
+          <div class="row mx-0">
+            <div class="col-22 col-lg-6 px-3 mx-auto text-center">
+              <div class="d-flex mx-0 mt-3 justify-content-between">
+                <label for="start">De: </label>
+                <input id="start" type="number" class="form-control form-control-sm px-0 d-inline mx-0" min="0"
+                  max="100" value="1" />
+                <label for="end">até: </label>
+                <input id="end" type="number" class="form-control form-control-sm px-0 d-inline mx-0" min="0" max="100"
+                  value="60" />
+              </div>
+              <div class="d-flex mx-0 mt-3 justify-content-between">
+                <label for="qtdNum">Números: </label>
+                <input id="qtdNum" type="number" class="form-control form-control-sm px-0 d-inline mx-0" min="0"
+                  max="15" value="6" />
+              </div>
+              <div class="d-flex mx-0 mt-3 justify-content-between">
+                <label for="qtdRound">Rodadas: </label>
+                <input id="qtdRound" type="number" class="form-control form-control-sm px-0 d-inline mx-0" min="0"
+                  max="100" value="10" />
+              </div>
             </div>
-            <div class="mt-3 d-flex justify-content-center">
-                <input type="checkbox" id="luck" checked="true" onclick="More()">
-                <span class="align-self-center">Mais Sorteados</span>
+          </div>
+          <hr class="my-3 mx-3 text-secondary">
+          <div class="row mx-0 my-3 align-items-center justify-content-center">
+            <div class="col-auto rounded form-check form-switch">
+              <input id="ckLuck" type="checkbox" checked="true" class="fs-5 form-check-input btn-success" role="switch"
+                onclick="showLuck()">
+              <label for="ckLuck">Gerar os mais Sorteados</label>
             </div>
-            <div class="mt-3 text-center">
-                <button class="btn btn-success px-3" type="button" onclick="Gerar()" />Gerar</button>
-            </div>
-            <div class="resultado mt-3 text-center">
-                <span id="res"> Aguardando Dados </span>
-                <span id="rod"> </span>
-                <span id="x"> </span>
-            </div>
+          </div>
         </div>
+        <div class="row mx-auto my-3 px-3 justify-content-between">
+          <div class="col-auto px-0">
+            <button id="gerar" class="btn btn-success px-3" type="button" onclick="Gerar()">Gerar</button>
+          </div>
+          <div class="col-auto px-0">
+            <button class="btn btn-outline-danger px-3" type="button" onclick="Clear()">Limpar</button>
+          </div>
+        </div>
+
+        <div id="prepare" class="d-none border rounded py-2">
+          <div class="text-center">
+            <i id="load" class="fs-3 bi bi-arrow-clockwise spin"></i>
+          </div>
+          <div id="result"></div>
+        </div>
+      </div>
     </div>
-    <div class="d-flex justify-content-center mt-3">
-        <span class="align-middle">Visualizações: </span>
-        <img src="https://megacontador.com.br/img-cUVadS1JhuU4hhkm-7.gif" />
-        <!-- Teste -->
-        <!-- <img src='https://megacontador.com.br/img-W47h9wzYMBQks9VA-7.gif'> -->
+    <div class="row mx-0 mt-3 justify-content-center">
+      <div class="col-auto text-center text-white">Visitas: </div>
+      <!-- <div class="col-auto px-0">
+      <img id="viewers" src="https://megacontador.com.br/img-cUVadS1JhuU4hhkm-7.gif" />
+      </div> -->
+      <!-- Teste -->
+      <div class="col-auto px-0">
+        <img id="viewers" src='https://megacontador.com.br/img-W47h9wzYMBQks9VA-7.gif'>
+      </div>
     </div>
-    <script src="js/main.js"></script>
+  </div>
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/actions.js"></script>
 </body>
 
 </html>
