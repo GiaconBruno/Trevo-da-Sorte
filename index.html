@@ -18,37 +18,45 @@
       <div class="col-lg-4 mx-auto bg-white rounded shadow-custom p-3">
         <div class="border rounded">
           <h1 class="my-3 fw-bold text-center">Trevo da Sorte</h1>
-          <hr class="my-3 mx-3 text-secondary">
-          <div class="row mx-0">
-            <div class="col-22 col-lg-6 px-3 mx-auto text-center">
-              <div class="d-flex mx-0 mt-3 justify-content-between">
-                <label for="start">De: </label>
-                <input id="start" type="number" class="form-control form-control-sm px-0 d-inline mx-0" min="0"
-                  max="100" value="1" />
-                <label for="end">até: </label>
-                <input id="end" type="number" class="form-control form-control-sm px-0 d-inline mx-0" min="0" max="100"
-                  value="60" />
-              </div>
-              <div class="d-flex mx-0 mt-3 justify-content-between">
-                <label for="qtdNum">Números: </label>
-                <input id="qtdNum" type="number" class="form-control form-control-sm px-0 d-inline mx-0" min="0"
-                  max="15" value="6" />
-              </div>
-              <div class="d-flex mx-0 mt-3 justify-content-between">
-                <label for="qtdRound">Rodadas: </label>
-                <input id="qtdRound" type="number" class="form-control form-control-sm px-0 d-inline mx-0" min="0"
-                  max="100" value="10" />
+          <div id="showData">
+            <hr class="my-3 mx-3 text-secondary" />
+            <div class="row mx-0">
+              <div class="col-22 col-lg-6 px-3 mx-auto text-center">
+                <div class="d-flex mx-0 mt-3 justify-content-between">
+                  <label for="start">De: </label>
+                  <input id="start" type="number" class="form-control form-control-sm px-0 d-inline mx-0" min="0"
+                    max="100" value="1" />
+                  <label for="end">até: </label>
+                  <input id="end" type="number" class="form-control form-control-sm px-0 d-inline mx-0" min="0"
+                    max="100" value="60" />
+                </div>
+                <div class="d-flex mx-0 mt-3 justify-content-between">
+                  <label for="qtdNum">Números: </label>
+                  <input id="qtdNum" type="number" class="form-control form-control-sm px-0 d-inline mx-0" min="0"
+                    max="15" value="6" />
+                </div>
+                <div class="d-flex mx-0 mt-3 justify-content-between">
+                  <label for="qtdRound">Rodadas: </label>
+                  <input id="qtdRound" type="number" class="form-control form-control-sm px-0 d-inline mx-0" min="0"
+                    max="100" value="10" />
+                </div>
               </div>
             </div>
+            <hr class="my-3 mx-3 text-secondary" />
           </div>
-          <hr class="my-3 mx-3 text-secondary">
           <div class="row mx-0 my-3 align-items-center justify-content-center">
             <div class="col-auto rounded form-check form-switch">
-              <input id="ckLuck" type="checkbox" checked="true" class="fs-5 form-check-input btn-success" role="switch"
-                onclick="showLuck()">
+              <input id="ckLuck" type="checkbox" checked="true" class="fs-5 form-check-input btn-success"
+                role="switch" onclick="showLuck()">
               <label for="ckLuck">Gerar os mais Sorteados</label>
             </div>
           </div>
+        </div>
+        <div id="prepare" class="d-none border rounded py-2 mt-3">
+          <div class="text-center">
+            <i id="load" class="fs-3 bi bi-arrow-clockwise spin"></i>
+          </div>
+          <div id="result"></div>
         </div>
         <div class="row mx-auto my-3 px-3 justify-content-between">
           <div class="col-auto px-0">
@@ -57,13 +65,6 @@
           <div class="col-auto px-0">
             <button class="btn btn-outline-danger px-3" type="button" onclick="Clear()">Limpar</button>
           </div>
-        </div>
-
-        <div id="prepare" class="d-none border rounded py-2">
-          <div class="text-center">
-            <i id="load" class="fs-3 bi bi-arrow-clockwise spin"></i>
-          </div>
-          <div id="result"></div>
         </div>
       </div>
     </div>

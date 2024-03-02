@@ -5,7 +5,7 @@
 }
 
 #first {
-  height: calc(100vh - 50px);
+  height: calc(100vh - 100px);
   overflow-y: auto;
 }
 
@@ -51,23 +51,33 @@ input#qtdNum {
   --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e") !important;
 }
 
-#visibleLuck .d-flex {
+#visibleLuck {
+  overflow-x: auto;
+}
+
+#visibleLuck .d-ruby {
   border: 1px solid;
   border-radius: 5px;
   background-color: #19875455;
 }
 
-#result .d-flex {
-  border-bottom: 1px solid;
+#shoots {
+  max-height: calc(100vh - 460px);
+  overflow-y: auto;
 }
 
-#result p {
+#shoots p,
+#visibleLuck p {
   width: 25px;
   margin: 0;
   text-align: center;
 }
 
-#result p:not(.clear).plus {
+#shoots p {
+  border-bottom: 1px solid;
+}
+
+#shoots span:not(.clear).plus {
   border-radius: 50%;
   background-color: #19875455;
 }
@@ -78,6 +88,10 @@ input#qtdNum {
 
 #viewers {
   max-width: 100px;
+}
+
+.d-ruby {
+  display: ruby !important;
 }
 
 @keyframes spin {
